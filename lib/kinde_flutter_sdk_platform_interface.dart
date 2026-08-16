@@ -23,7 +23,7 @@ abstract class KindeFlutterSdkPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<String?> getPlatformVersion() {
-    throw UnimplementedError('platformVersion() has not been implemented.');
+  Future<Map<dynamic, dynamic>?> getRescuedAuthJson() {
+    throw UnimplementedError('getRescuedAuthJson() has not been implemented.');
   }
 }

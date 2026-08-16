@@ -7,13 +7,14 @@ import 'kinde_flutter_sdk_platform_interface.dart';
 class MethodChannelKindeFlutterSdk extends KindeFlutterSdkPlatform {
   /// The method channel used to interact with the native platform.
   @visibleForTesting
-  final methodChannel = const MethodChannel('kinde_flutter_sdk');
+  final methodChannel = const MethodChannel('com.kinde.flutter/auth');
+
 
   @override
-  Future<String?> getPlatformVersion() async {
-    final version = await methodChannel.invokeMethod<String>(
-      'getPlatformVersion',
+  Future<Map<dynamic, dynamic>?> getRescuedAuthJson() async {
+    final result = await methodChannel.invokeMethod<Map<dynamic, dynamic>>(
+      'getRescuedAuthJson',
     );
-    return version;
+    return result;
   }
 }
