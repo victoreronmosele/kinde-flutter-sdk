@@ -389,12 +389,21 @@ class KindeFlutterSDK with TokenUtils {
       if (!kIsWeb && Platform.isAndroid) {
         final Map<dynamic, dynamic>? result = await KindeFlutterSdkPlatform.instance.getRescuedAuthJson();
         final resultResponse = result?['response'];
-        if (resultResponse != null) {
+        if (resultResponse is String ) {
           kindeDebugPrint(
             methodName: '_checkAndRecoverAndroidLogin',
-            message: 'Found rescued Android login JSON. Attempting recovery...'
+            message: 'Found rescued Android auth JSON state. Attempting recovery...'
           );
           await _recoverAndroidLogin(rescuedAuthJson: resultResponse);
+          return;
+        }
+
+         final resultException = result?['exception'];
+         if (resultException is String) {
+           kindeDebugPrint(
+             methodName: '_checkAndRecoverAndroidLogin',
+             message: 'Recovered Android auth failure: $resultException'
+           );
         }
       }
     } catch (e) {
